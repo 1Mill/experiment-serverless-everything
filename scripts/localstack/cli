@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+source $(dirname $BASH_SOURCE)/config # * Load environment variable
+source $(dirname $BASH_SOURCE)/commands/$1 # * Run command
