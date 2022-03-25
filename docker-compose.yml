@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  localstack:
+    image: localstack/localstack:0.14.1
+    environment:
+      DEFAULT_REGION: us-west-1
+      DISABLE_CORS_CHECKS: 1
+      DNS_LOCAL_NAME_PATTERNS: .*(ecr|lambda).*
+      FORCE_NONINTERACTIVE: 1
+      HOST_TMP_FOLDER: /tmp/localstack
+      LAMBDA_DOCKER_NETWORK: localstack-network
+      LAMBDA_EXECUTOR: docker
+      LAMBDA_REMOTE_DOCKER: 0
+      LOCALSTACK_API_KEY: $LOCALSTACK_API_KEY
+      LS_LOG: trace
+      SERVICES: ecr,lambda
+    ports:
+      - 4566:4566
+    volumes:
+      - /tmp/localstack:/tmp/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  mongo:
+    image: mongo:5.0.6
+    environment:
+      MONGO_INITDB_DATABASE: development
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_ROOT_USERNAME: root
+    restart: always
+    volumes:
+      - mongo-volume:/data/db
+
+  mongo-admin:
+    image: mongo-express:1.0.0-alpha.4
+    depends_on:
+      - mongo
+    environment:
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_URL: mongodb://root:password@mongo:27017/
+    ports:
+      - 8081:8081
+    restart: always
+
+networks:
+  default:
+    name: localstack-network
+
+volumes:
+  mongo-volume: {}
