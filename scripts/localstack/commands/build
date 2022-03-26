@@ -1,4 +1,20 @@
 #!/usr/bin/env bash
 set -e
 
-echo $LOCALSTACK_REGION
+function build() {
+	# * Props
+	local path=$1
+
+	# * Load config variables into environment
+	local config_path=$(pwd)/$1/$LAMBDA_CONFIG_FILENAME
+	source $config_path
+
+	# * Compute values
+	local dir=$(pwd)/$path
+	local function_name=$FUNCTION_NAME
+
+	# * Run command
+	docker build --tag $function_name $dir
+}
+
+build "$1"
