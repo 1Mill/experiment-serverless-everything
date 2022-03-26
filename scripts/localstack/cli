@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
-source $(dirname $BASH_SOURCE)/config # * Load environment variable
-source $(dirname $BASH_SOURCE)/commands/$1 # * Run command
+function cli() {
+	local path=$1
+	local cmd=$2
+	local args=${@:3}
+
+	# * Load environment variable
+	source $(dirname $BASH_SOURCE)/config
+
+	# * Run command
+	source $(dirname $BASH_SOURCE)/commands/$cmd $path $args
+}
+
+cli ${@:1} # * Pass through all arguments to function
