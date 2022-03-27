@@ -11,10 +11,10 @@ function build() {
 
 	# * Compute values
 	local dir=$(pwd)/$path
-	local function_name=$FUNCTION_NAME
+	local name=$NAME
 
 	# * Run command
-	docker build --tag $function_name $dir
+	docker build --tag $name $dir
 }
 
 build "$1"

@@ -1,1 +1,1 @@
-FUNCTION_NAME=hello-world
+NAME=hello-world-v0
