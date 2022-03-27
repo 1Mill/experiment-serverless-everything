@@ -6,7 +6,7 @@ function build() {
 	local path=$1
 
 	# * Load config variables into environment
-	local config_path=$(pwd)/$1/$LAMBDA_CONFIG_FILENAME
+	local config_path=$(pwd)/$path/$LAMBDA_CONFIG_FILENAME
 	source $config_path
 
 	# * Compute values
