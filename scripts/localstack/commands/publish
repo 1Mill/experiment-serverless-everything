@@ -1,4 +1,28 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Hello World!"
+function publish() {
+	# * Props
+	local path=$1
+
+	# * Load environmental variables
+	# ! The environmental variables file must be loaded first
+	# ! so that the config file can use its values later on
+	local env_path=$(pwd)/$path/$LAMBDA_ENV_FILENAME
+	if [ -f "$env_path" ]; then
+		source $env_path
+	fi
+
+	# * Load config variables into environment
+	local config_path=$(pwd)/$path/$LAMBDA_CONFIG_FILENAME
+	source $config_path
+
+	# * Computed values
+	local dev_env=${DEV_ENV-"{}"}
+	local name=$NAME
+	local timeout=$TIMEOUT
+
+	echo $NAME
+}
+
+publish $1
