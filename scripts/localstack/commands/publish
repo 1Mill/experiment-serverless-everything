@@ -22,7 +22,29 @@ function publish() {
 	local name=$NAME
 	local timeout=$TIMEOUT
 
-	echo $NAME
+	# * Run command
+	aws lambda delete-function \
+		--endpoint $LOCALSTACK_URL \
+		--function-name $name \
+		--no-cli-pager \
+		--region $LOCALSTACK_REGION || true # ! Do not error when function is not found
+
+	aws lambda create-function \
+		--code ImageUri=$name \
+		--endpoint $LOCALSTACK_URL \
+		--function-name $name \
+		--no-cli-pager \
+		--package-type Image \
+		--region $LOCALSTACK_REGION \
+		--role arn:aws:iam::000000000:role/lambda-placeholder \
+		--timeout $timeout
+
+	aws lambda update-function-configuration \
+		--endpoint $LOCALSTACK_URL \
+		--environment "Variables=$dev_env" \
+		--function-name $name \
+		--no-cli-pager \
+		--region $LOCALSTACK_REGION
 }
 
 publish $1
