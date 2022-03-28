@@ -1,0 +1,6 @@
+.dockerignore
+.env
+config.bash
+dockerfile
+main.tf
+node_modules
