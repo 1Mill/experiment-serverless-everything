@@ -3,14 +3,15 @@ set -e
 
 function cli() {
 	local path=$1
-	local cmd=$2
+	local cmds=($(echo $2 | tr "," "\n")) # * Submit multiple comma seperated commands (e.g. build,invoke)
 	local args=${@:3}
-
 	# * Load environment variable
 	source $(dirname $BASH_SOURCE)/config
 
-	# * Run command
-	source $(dirname $BASH_SOURCE)/commands/$cmd $path $args
+	# * Run commands
+	for cmd in "${cmds[@]}"; do
+		source $(dirname $BASH_SOURCE)/commands/$cmd $path $args
+	done
 }
 
 cli ${@:1} # * Pass through all arguments to function
