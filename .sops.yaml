@@ -1,0 +1,3 @@
+# creation rules are evaluated sequentially, the first match wins
+creation_rules:
+  - kms: 'arn:aws:kms:us-west-2:076550078650:key/ffa36fd5-8d96-4b40-90e3-cda27bab9717'
