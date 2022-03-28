@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+function version() {
+	# * Props
+	local path=$1
+
+	# * Computed files
+	local config_path=$(pwd)/$path/$LAMBDA_CONFIG_FILENAME
+	local version=$(date -u +"%Y-%m-%dT%H-%M-%S")
+
+	# * Update version in config file
+	sed -i "s/VERSION=.*/VERSION=${version}/" $config_path
+}
+
+version $1
