@@ -1,3 +1,6 @@
 exports.handler = (event, ctx) => {
-	return 'Hello World!'
+	return {
+		event,
+		isWorking: true,
+	}
 }
