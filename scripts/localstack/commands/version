@@ -7,7 +7,7 @@ function version() {
 
 	# * Computed files
 	local config_path=$(pwd)/$path/$LAMBDA_CONFIG_FILENAME
-	local version=$(date -u +"%Y-%m-%dT%H-%M-%S")
+	local version=$(date -u +"%Y-%m-%dT%H-%M-%S") # UTC datetime
 
 	# * Update version in config file
 	sed -i "s/VERSION=.*/VERSION=${version}/" $config_path
