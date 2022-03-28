@@ -17,4 +17,4 @@ function build() {
 	docker build --tag $name $dir
 }
 
-build "$1"
+build $1
