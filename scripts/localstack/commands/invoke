@@ -1,4 +1,27 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Hello World!"
+function invoke() {
+	# * Props
+	local path=$1
+	local payload=${2-"{}"}
+
+	# * Load config variables into environment
+	local config_path=$(pwd)/$path/$LAMBDA_CONFIG_FILENAME
+	source $config_path
+
+	# * Compute values
+	local name=$NAME
+
+	aws lambda invoke \
+		--cli-binary-format raw-in-base64-out \
+		--endpoint $LOCALSTACK_URL \
+		--function-name $name \
+		--invocation-type RequestResponse \
+		--no-cli-pager \
+		--payload "$payload" \
+		--region $LOCALSTACK_REGION \
+		output.json
+}
+
+invoke $1 "$2"
