@@ -1,1 +1,8 @@
+# General
 .env
+
+# Lambda
+output.json
+
+# Node
+node_modules
