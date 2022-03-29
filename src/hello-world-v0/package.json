@@ -8,5 +8,8 @@
   },
   "author": "",
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@1mill/cloudevents": "^4.0.1"
+  }
 }
