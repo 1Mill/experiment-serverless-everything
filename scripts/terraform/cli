@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+
+function cli() {
+	local path=$1
+	local command=$2
+
+	# * Load CLI environmental variables
+	source $(dirname $BASH_SOURCE)/config
+
+	# * Load config variables into environment
+	source $path/$CONFIG_FILENAME
+
+	# * Computed values
+	local dir=$PWD/$path
+	local version=$TERRAFORM
+
+	COMMAND=$command \
+	DIR=$dir \
+	VERSION=$version \
+	docker compose --file $(dirname $BASH_SOURCE)/docker-compose.yml up terraform
+}
+
+cli ${@:1} # * Pass through all arguments to function

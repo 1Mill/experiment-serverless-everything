@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  terraform:
+    command: $COMMAND
+    image: hashicorp/terraform:$VERSION
+    volumes:
+      - $DIR:/app
+    working_dir: /app
