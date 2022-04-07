@@ -8,6 +8,9 @@ function cli() {
 	# * Load CLI environmental variables
 	source $(dirname $BASH_SOURCE)/config
 
+	# * Load .env from project root into the environment
+	source $(dirname $BASH_SOURCE)/../../$ENV_FILENAME
+
 	# * Load config variables into environment
 	source $path/$CONFIG_FILENAME
 
@@ -15,6 +18,9 @@ function cli() {
 	local dir=$PWD/$path
 	local version=$TERRAFORM
 
+	AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+	AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION \
+	AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
 	COMMAND=$command \
 	DIR=$dir \
 	VERSION=$version \
