@@ -10,4 +10,5 @@ services:
       AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
     volumes:
       - $DIR:/app
+      - /var/run/docker.sock:/var/run/docker.sock
     working_dir: /app
