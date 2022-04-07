@@ -6,3 +6,6 @@ output.json
 
 # Node
 node_modules
+
+# Terraform
+.terraform
