@@ -3,7 +3,7 @@ set -e
 
 function cli() {
 	local path=$1
-	local command=$2
+	local command=${@:2}
 
 	# * Load CLI environmental variables
 	source $(dirname $BASH_SOURCE)/config
