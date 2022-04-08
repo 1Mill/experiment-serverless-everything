@@ -8,4 +8,5 @@ output.json
 node_modules
 
 # Terraform
+*terraform.tfstate*
 .terraform
