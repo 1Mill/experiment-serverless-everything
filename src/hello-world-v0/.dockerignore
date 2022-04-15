@@ -1,5 +1,12 @@
-.dockerignore
 .env
 config.bash
+
+.dockerignore
 dockerfile
+
+.terraform
+main.tf
+terraform.tfstate
+terraform.tfstate.backup
+
 node_modules
