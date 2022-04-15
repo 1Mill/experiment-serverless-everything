@@ -1,13 +1,18 @@
+# General
 .env
 config.bash
 
+# Docker
 .dockerignore
 dockerfile
 
+# Terraform
 .terraform
 .terraform.lock.hcl
+.terraform.tfstate.lock.info
 main.tf
 terraform.tfstate
 terraform.tfstate.backup
 
+# Node
 node_modules
