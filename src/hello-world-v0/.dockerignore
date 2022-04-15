@@ -5,6 +5,7 @@ config.bash
 dockerfile
 
 .terraform
+.terraform.lock.hcl
 main.tf
 terraform.tfstate
 terraform.tfstate.backup
