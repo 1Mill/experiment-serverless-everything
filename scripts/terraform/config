@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-CONFIG_FILENAME=config.bash
-ENV_FILENAME=.env
