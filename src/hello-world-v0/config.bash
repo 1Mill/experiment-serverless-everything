@@ -1,5 +1,3 @@
-TERRAFORM=1.1.7
-
 MEMORY=128
 NAME=hello-world-v0
 TIMEOUT=3
