@@ -4,10 +4,11 @@ services:
   terragrunt:
     image: alpine/terragrunt:1.1.8
     command: $COMMAND --terragrunt-exclude-dir ./
-    entrypoint: terragrunt
-    env_file:
-      - $DIR/.env
+    entrypoint: terragrunt # * Run "terragrunt $command" by default
     environment:
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
       TERRAGRUNT_PARALLELISM: 16 # * Max parallel builds
       TF_INPUT: false # * Disable interactive prompts
     volumes:

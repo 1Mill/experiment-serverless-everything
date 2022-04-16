@@ -7,11 +7,22 @@ function cli() {
 	# * Computed values
 	local project_root=$PWD/$(dirname $BASH_SOURCE)/../../
 
+	# * Load .env from project root into the environment
+	local project_root_env_file=$project_root/.env
+	if [[ -f "$project_root_env_file" ]]; then
+		source $project_root_env_file
+	fi
+
+	AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+	AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION \
+	AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
 	COMMAND=$command \
 	DIR=$project_root \
 	docker compose \
 		--file $(dirname $BASH_SOURCE)/docker-compose.yml \
-		up --exit-code-from terragrunt terragrunt
+		up \
+			--exit-code-from terragrunt \
+			terragrunt
 }
 
 cli ${@:1} # * Pass through all arguments to function
