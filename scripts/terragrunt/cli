@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+function cli() {
+	local command=${@:1}
+
+	# * Computed values
+	local project_root=$PWD/$(dirname $BASH_SOURCE)/../../
+
+	COMMAND=$command \
+	DIR=$project_root \
+	docker compose \
+		--file $(dirname $BASH_SOURCE)/docker-compose.yml \
+		up --exit-code-from terragrunt terragrunt
+}
+
+cli ${@:1} # * Pass through all arguments to function

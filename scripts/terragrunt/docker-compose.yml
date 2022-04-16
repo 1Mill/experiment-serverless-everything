@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  terragrunt:
+    image: alpine/terragrunt:1.1.8
+    command: $COMMAND --terragrunt-exclude-dir ./
+    entrypoint: terragrunt
+    env_file:
+      - $DIR/.env
+    environment:
+      TERRAGRUNT_PARALLELISM: 16 # * Max parallel builds
+      TF_INPUT: false # * Disable interactive prompts
+    volumes:
+      - $DIR:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /app
