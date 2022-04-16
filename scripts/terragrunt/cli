@@ -2,15 +2,20 @@
 set -e
 
 function cli() {
+	# * Props
 	local command=${@:1}
 
 	# * Computed values
-	local project_root=$PWD/$(dirname $BASH_SOURCE)/../../
+	local cli_root=$(dirname $BASH_SOURCE)
+	local project_root=$PWD/$cli_root/../../ # * Must be absolute path for Docker Volume
 
-	# * Load .env from project root into the environment
-	local project_root_env_file=$project_root/.env
-	if [[ -f "$project_root_env_file" ]]; then
-		source $project_root_env_file
+	# * Load CLI environmental variables
+	source $cli_root/config
+
+	# * Load .env from project root into the environment if it exists
+	local env_file=$project_root/$ENV_FILENAME
+	if [[ -f "$env_file" ]]; then
+		source $env_file
 	fi
 
 	AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
