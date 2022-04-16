@@ -1,9 +1,13 @@
 const { Cloudevent } = require('@1mill/cloudevents')
+const { Sops } = require('@1mill/sops')
+
+const sops = new Sops({ file: 'secrets.sops.json' })
 
 exports.handler = async (event, ctx) => {
 	return new Cloudevent({
 		data: JSON.stringify({
 			MY_SECRET_MESSAGE: process.env.MY_SECRET_MESSAGE,
+			decrypted_sops_mesage: await sops.decrypt('MY_SOPS_MESSAGE'),
 			event,
 			isWorking: true,
 		}),
