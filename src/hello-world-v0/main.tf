@@ -1,6 +1,6 @@
 module "config" {
 	source  = "1Mill/file-to-object/local"
-  	version = "0.0.3"
+	version = "0.0.3"
 
 	filename = "${path.module}/config.bash"
 }
