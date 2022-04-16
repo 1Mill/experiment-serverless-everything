@@ -10,9 +10,12 @@ dockerfile
 .terraform
 .terraform.lock.hcl
 .terraform.tfstate.lock.info
+backend.tf
 main.tf
+providers.tf
 terraform.tfstate
 terraform.tfstate.backup
+terragrunt.hcl
 
 # Node
 node_modules
