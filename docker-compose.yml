@@ -17,6 +17,7 @@ services:
       SERVICES: ecr,lambda
     ports:
       - 4566:4566
+    restart: always
     volumes:
       - /tmp/localstack:/tmp/localstack
       - /var/run/docker.sock:/var/run/docker.sock
