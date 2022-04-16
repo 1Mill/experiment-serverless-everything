@@ -16,4 +16,11 @@ remote_state {
 		path = "backend.tf"
 	}
 }
+
+generate "provider" {
+	contents = <<-EOF
+		terraform { required_version = "~> 1.1" }
+	EOF
+	if_exists = "skip"
+	path = "providers.tf"
 }
