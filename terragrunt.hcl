@@ -1,9 +1,5 @@
 remote_state {
 	backend = "s3"
-	generate  = {
-		if_exists = "overwrite_terragrunt"
-		path = "backend.tf"
-	}
 	config = {
 		// access_key = ENVIRONMENT AWS_ACCESS_KEY_ID
 		// region = ENVIRONMENT AWS_DEFAULT_REGION
@@ -15,4 +11,9 @@ remote_state {
 		key = "${path_relative_to_include()}/terraform.tfstate"
 		region = "us-east-1"
 	}
+	generate  = {
+		if_exists = "overwrite_terragrunt"
+		path = "backend.tf"
+	}
+}
 }
