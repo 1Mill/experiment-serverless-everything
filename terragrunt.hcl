@@ -17,10 +17,19 @@ remote_state {
 	}
 }
 
-generate "provider" {
+generate "versions" {
 	contents = <<-EOF
-		terraform { required_version = "~> 1.1" }
+		terraform {
+			required_version = "~> 1.1"
+
+			required_providers {
+				aws = {
+					source  = "hashicorp/aws"
+					version = "~> 4.10"
+				}
+			}
+		}
 	EOF
 	if_exists = "skip"
-	path = "providers.tf"
+	path = "versions.tf"
 }
