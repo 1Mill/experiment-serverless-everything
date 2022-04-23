@@ -1,3 +1,10 @@
+terraform {
+	extra_arguments "retry_lock" {
+		arguments = ["-lock-timeout=2m"]
+		commands  = get_terraform_commands_that_need_locking()
+	}
+}
+
 remote_state {
 	backend = "s3"
 	config = {
