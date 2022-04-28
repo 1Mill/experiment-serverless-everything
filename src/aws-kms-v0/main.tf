@@ -1,4 +1,3 @@
-
 resource "aws_kms_alias" "this" {
 	name = "alias/experiment-serverless-everything"
 	target_key_id = resource.aws_kms_key.this.key_id
