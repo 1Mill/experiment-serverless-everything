@@ -1,3 +1,5 @@
+variable "policy" { type = string }
+
 module "config" {
 	source  = "1Mill/file-to-object/local"
 	version = "0.0.3"
@@ -6,7 +8,7 @@ module "config" {
 }
 module "serverless_docker_function" {
 	source  = "1Mill/serverless-docker-function/aws"
-	version = "0.0.4"
+	version = "0.0.5"
 
 	docker = { build = abspath(path.module) }
 	environment = {
@@ -19,4 +21,5 @@ module "serverless_docker_function" {
 		timeout = module.config.data.TIMEOUT
 		version = module.config.data.VERSION
 	}
+	policy = var.policy
 }
