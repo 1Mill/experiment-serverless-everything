@@ -9,7 +9,7 @@ remote_state {
 	backend = "s3"
 	config = {
 		// access_key = ENVIRONMENT AWS_ACCESS_KEY_ID
-		// region = ENVIRONMENT AWS_DEFAULT_REGION
+		// region = ENVIRONMENT AWS_REGION
 		// secret_key = ENVIRONMENT AWS_SECRET_ACCESS_KEY
 
 		bucket = "experiment-terraform-state"
