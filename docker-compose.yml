@@ -4,7 +4,7 @@ services:
   localstack:
     image: localstack/localstack:0.14.1
     environment:
-      DEFAULT_REGION: us-west-1
+      DEFAULT_REGION: us-west-2
       DISABLE_CORS_CHECKS: 1
       DNS_LOCAL_NAME_PATTERNS: .*(ecr|lambda).*
       FORCE_NONINTERACTIVE: 1
