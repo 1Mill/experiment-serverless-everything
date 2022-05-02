@@ -1,6 +1,33 @@
 #!/usr/bin/env bash
 set -e
 
+function aws_to_json_object() {
+	local aws_object=$1
+
+	echo $aws_object | jq --compact-output --raw-input --sort-keys '
+		split(" ")
+		| .[1:-1] # * Remove brackets (e.g. "{ ... }")
+		| map(split("="))
+		| map({ "key": .[0], "value": .[1] })
+		| from_entries
+	'
+}
+
+function json_to_aws_object() {
+	local json_object=$1
+
+	local string=$(echo $json_object | jq --compact-output --sort-keys '
+		to_entries
+		| map([.key, .value])
+		| map(join("="))
+		| join(",")
+	')
+
+	# * Wrap output in brackets to align with expected AWS format and
+	# * remove quotes output by jq (e.g. { "MY_KEY=..." } => { MY_KEY=... })
+	echo { ${string:1:-1} }
+}
+
 function publish() {
 	# * Props
 	local path=$1
@@ -22,29 +49,34 @@ function publish() {
 	local name=$NAME
 	local timeout=$TIMEOUT
 
+	local dev_env_json=$(aws_to_json_object "$DEV_ENV")
+	local reserved_env_json=$(aws_to_json_object "{
+		AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID
+		AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+		AWS_REGION=$AWS_REGION
+		AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+	}")
+
+	local env_json=$(echo $dev_env_json $reserved_env_json | jq --compact-output --slurp '.[0] * .[1]') # * Merge json objects
+	local env=$(json_to_aws_object "$env_json")
+
 	# * Run command
 	aws lambda delete-function \
 		--endpoint $LOCALSTACK_URL \
 		--function-name $name \
 		--no-cli-pager \
-		--region $LOCALSTACK_REGION || true # ! Do not error when function is not found
+		--region $LOCALSTACK_REGION || true # ! If the lambda does not exist, do not throw a "not found" error
 
 	aws lambda create-function \
 		--code ImageUri=$name \
 		--endpoint $LOCALSTACK_URL \
+		--environment "Variables=$env" \
 		--function-name $name \
 		--no-cli-pager \
 		--package-type Image \
 		--region $LOCALSTACK_REGION \
 		--role arn:aws:iam::000000000:role/lambda-placeholder \
 		--timeout $timeout
-
-	aws lambda update-function-configuration \
-		--endpoint $LOCALSTACK_URL \
-		--environment "Variables=$dev_env" \
-		--function-name $name \
-		--no-cli-pager \
-		--region $LOCALSTACK_REGION
 }
 
 publish $1
