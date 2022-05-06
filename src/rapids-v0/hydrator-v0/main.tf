@@ -1,5 +1,3 @@
-variable "policy" { type = string }
-
 module "config" {
 	source  = "1Mill/file-to-object/local"
 	version = "0.0.3"
@@ -21,5 +19,4 @@ module "serverless_docker_function" {
 		timeout = module.config.data.TIMEOUT
 		version = module.config.data.VERSION
 	}
-	policy = var.policy
 }
