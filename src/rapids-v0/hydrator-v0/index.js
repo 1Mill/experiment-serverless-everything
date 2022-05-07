@@ -1,5 +1,4 @@
 const fs = require('fs')
-const { Cloudevent } = require('@1mill/cloudevents')
 const { Lambda } = require('@1mill/lambda')
 
 const ROUTES_DIR = Object.freeze('./routes/')
