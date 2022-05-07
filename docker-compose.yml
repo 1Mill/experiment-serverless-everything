@@ -6,7 +6,7 @@ services:
     environment:
       DEFAULT_REGION: us-west-2
       DISABLE_CORS_CHECKS: 1
-      DNS_LOCAL_NAME_PATTERNS: .*(ecr|lambda).*
+      DNS_LOCAL_NAME_PATTERNS: .*(ecr|lambda).* # Only send ECR and Lambda API requests to localstack
       FORCE_NONINTERACTIVE: 1
       HOST_TMP_FOLDER: /tmp/localstack
       LAMBDA_DOCKER_NETWORK: localstack-network
