@@ -39,9 +39,12 @@ exports.handler = async (cloudevent = {}, ctx) => {
 		...functionNames,
 	].map(functionName => lambda.invoke({ cloudevent, functionName, invocationType: 'Event' }))
 
-	// * Wait for every promise to finish, regardless of error status.
+	// * Wait for every promise to finish and collect all success and error responses.
 	const results = await Promise.allSettled(promises)
-	results.filter(r => r.status === 'rejected').forEach(r => console.error(r.reason))
+
+	// * Throw an error if any promise encounted an error.
+	const rejections = results.filter(r => r.status === 'rejected').map(r => r.reason).join('; ')
+	if (rejections) { throw new Error(rejections) }
 
 	return true
 }
