@@ -57,7 +57,6 @@ function publish() {
 		AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 		MILL_LAMBDA_AWS_ENDPOINT=http://localstack:4566/
 	}")
-
 	local env_json=$(echo $dev_env_json $reserved_env_json | jq --compact-output --slurp '.[0] * .[1]') # * Merge json objects
 	local env=$(json_to_aws_object "$env_json")
 
