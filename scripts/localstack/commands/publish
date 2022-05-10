@@ -53,7 +53,7 @@ function publish() {
 	local reserved_env_json=$(aws_to_json_object "{
 		AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID
 		AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-		AWS_REGION=$AWS_REGION
+		AWS_REGION=$LOCALSTACK_REGION
 		AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 	}")
 
