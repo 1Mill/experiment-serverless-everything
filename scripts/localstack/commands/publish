@@ -49,7 +49,7 @@ function publish() {
 	local name=$NAME
 	local timeout=$TIMEOUT
 
-	local dev_env_json=$(aws_to_json_object "$DEV_ENV")
+	local dev_env_json=$(aws_to_json_object "$dev_env")
 	local reserved_env_json=$(aws_to_json_object "{
 		AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID
 		AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
