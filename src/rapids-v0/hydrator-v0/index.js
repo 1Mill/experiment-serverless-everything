@@ -4,12 +4,7 @@ const { Lambda } = require('@1mill/lambda')
 const ROUTES_DIR = Object.freeze('./routes/')
 const WEBSOCKETS_FUNCTIONNAME = Object.freeze('rapids-v0-websockets-v0')
 
-const lambda = new Lambda({
-	accessKeyId: 'palceholder',
-	endpoint: 'http://localhost:4566/',
-	region: 'us-west-2',
-	secretAccessKey: 'palceholder',
-})
+const lambda = new Lambda({})
 
 exports.handler = async (cloudevent = {}, ctx) => {
 	// * Validate the invoking cloudevent arguments.
