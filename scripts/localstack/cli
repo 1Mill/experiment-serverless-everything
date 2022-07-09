@@ -6,10 +6,10 @@ function cli() {
 	local cmds=($(echo $2 | tr "," "\n")) # * Submit multiple comma seperated commands (e.g. build,invoke)
 	local args=${@:3}
 
-	# * Load project environmental varaibles
+	# * Load environmental varaibles from project root
 	source $(dirname $BASH_SOURCE)/../../.env
 
-	# * Load environment variable
+	# * Load environment variable from CLI root
 	source $(dirname $BASH_SOURCE)/config
 
 	# * Run commands
