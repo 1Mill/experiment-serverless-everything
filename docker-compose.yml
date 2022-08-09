@@ -4,7 +4,7 @@ services:
   localstack:
     image: localstack/localstack:1.0.3
     environment:
-      DEFAULT_REGION: us-west-2
+      DEFAULT_REGION: $AWS_REGION
       DISABLE_CORS_CHECKS: 1
       DNS_LOCAL_NAME_PATTERNS: .*(ecr|lambda).* # Only send ECR and Lambda API requests to localstack
       FORCE_NONINTERACTIVE: 1

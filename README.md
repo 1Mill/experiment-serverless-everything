@@ -9,10 +9,12 @@
 1. Create and fill out your personal `.env` file:
 
     ```bash
+    # AWS credentials
     AWS_ACCESS_KEY_ID=
-    AWS_REGION=us-west-2 # If you change this, find and replace all other instances in the code
+    AWS_REGION=
     AWS_SECRET_ACCESS_KEY=
 
+    # LocalStack Pro credentials
     LOCALSTACK_API_KEY=
     ```
 
