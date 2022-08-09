@@ -1,23 +1,9 @@
-# ! https://github.com/kreuzwerker/terraform-provider-docker/issues/249
+*
 
-# General
-.env
-config.bash
+!.dockerignore
+!dockerfile
+!index.js
+!package-lock.json
+!package.json
 
-# Docker
-.dockerignore
-dockerfile
-
-# Terraform
-.terraform
-.terraform.lock.hcl
-.terraform.tfstate.lock.info
-backend.tf
-main.tf
-providers.tf
-terraform.tfstate
-terraform.tfstate.backup
-terragrunt.hcl
-
-# Node
-node_modules
+!secrets.sops.json
