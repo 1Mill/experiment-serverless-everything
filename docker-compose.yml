@@ -2,7 +2,7 @@ version: '3'
 
 services:
   localstack:
-    image: localstack/localstack:0.14.2
+    image: localstack/localstack:1.0.3
     environment:
       DEFAULT_REGION: us-west-2
       DISABLE_CORS_CHECKS: 1
