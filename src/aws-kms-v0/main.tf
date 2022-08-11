@@ -8,6 +8,7 @@ data "aws_iam_policy_document" "this" {
 		sid = "DecryptSOPSFiles"
 	}
 }
+
 resource "aws_kms_alias" "this" {
 	name = "alias/experiment-serverless-everything"
 	target_key_id = resource.aws_kms_key.this.key_id
