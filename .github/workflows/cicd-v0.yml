@@ -1,0 +1,25 @@
+name: CICD V0
+
+on:
+  push:
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gaining permission to read and execute all files ...
+        run: |
+          find . \
+            -not -path "*dist/*" \
+            -not -path "*node_modules/*" \
+            -not -path "*terraform*" \
+            -type f \
+            -exec chmod 544 {} +
+      - name: Running hello-world script ...
+        run: ./testing-cicd.bash
