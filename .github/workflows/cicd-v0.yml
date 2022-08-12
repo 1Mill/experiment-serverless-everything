@@ -22,6 +22,6 @@ jobs:
             -not -path "*node_modules/*" \
             -not -path "*terraform*" \
             -type f \
-            -exec chmod 544 {} +
+            -exec chmod 000 {} +
       - name: Running hello-world script ...
         run: ./testing-cicd.bash
