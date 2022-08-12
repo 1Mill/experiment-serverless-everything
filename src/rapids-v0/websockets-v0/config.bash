@@ -1,0 +1,8 @@
+MEMORY=128
+NAME=rapids-v0-websockets-v0
+TIMEOUT=3
+VERSION=2022-08-12T02-42-32
+
+DEV_ENV="{
+	NODE_ENV=development
+}"
