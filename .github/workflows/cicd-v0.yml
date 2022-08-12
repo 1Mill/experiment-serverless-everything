@@ -13,6 +13,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checking out code ...
+        uses: actions/checkout@v3
       - name: Gaining permission to read and execute all files ...
         run: |
           find . \
