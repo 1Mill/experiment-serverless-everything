@@ -8,6 +8,7 @@ services:
       AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
       AWS_REGION: $AWS_REGION
       AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      GITHUB_TOKEN: $GITHUB_TOKEN
       TERRAGRUNT_PARALLELISM: 16 # * Max parallel builds
       TF_INPUT: false # * Disable interactive prompts
     volumes:

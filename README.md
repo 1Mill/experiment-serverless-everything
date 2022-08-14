@@ -14,11 +14,14 @@
     AWS_REGION=ca-central-1
     AWS_SECRET_ACCESS_KEY=
 
+    # GitHub credentials
+    GITHUB_TOKEN=
+
     # LocalStack Pro credentials
     LOCALSTACK_API_KEY=
     ```
 
-1. If you are not using `AWS_REGION=ca-central-1`, also change the value of `AWS_REGION` in `./.github/workflows/cicd-v0.yml`
+1. If you are not using `AWS_REGION=ca-central-1`, change the value of `AWS_REGION` in `./infra/cicd-v0/main.tf` as well
 
 1. Run `./scripts/terragrunt/cli run-all apply` to deploy the application and generate your personal AWS KMS key
 
