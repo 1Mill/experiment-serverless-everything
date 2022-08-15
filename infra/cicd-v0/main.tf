@@ -22,6 +22,7 @@ module "iam_user" {
 	force_destroy = true
 	name = "experiment-serverless-everything-cicd-v0-${each.key}"
 	password_length = 64
+	permissions_boundary = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
 resource "github_actions_secret" "aws_access_key_id" {
