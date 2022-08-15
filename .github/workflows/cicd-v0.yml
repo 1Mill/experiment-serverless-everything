@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths:
+      - .github/**
+      - infra/**
+      - scripts/**
+      - src/**
 
 defaults:
   run:
