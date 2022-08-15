@@ -9,12 +9,12 @@
 1. Create and fill out your personal `.env` file:
 
     ```bash
-    # AWS credentials
+    # AWS credentials with "AdministratorAccess" permissions
     AWS_ACCESS_KEY_ID=
     AWS_REGION=ca-central-1
     AWS_SECRET_ACCESS_KEY=
 
-    # GitHub credentials
+    # GitHub credentials with "workflow" permissions
     GITHUB_TOKEN=
 
     # LocalStack Pro credentials
