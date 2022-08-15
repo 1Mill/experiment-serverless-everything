@@ -1,3 +1,5 @@
+provider "github" {}
+
 data "github_repository" "this" {
 	full_name = "1Mill/experiment-serverless-everything"
 }
