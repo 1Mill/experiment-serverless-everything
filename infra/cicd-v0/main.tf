@@ -22,7 +22,13 @@ module "iam_user" {
 	force_destroy = true
 	name = "experiment-serverless-everything-cicd-v0-${each.key}"
 	password_length = 64
-	permissions_boundary = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
+resource "aws_iam_user_policy_attachment" "this" {
+	for_each = toset([for iam_user in module.iam_user : iam_user.iam_user_name])
+
+	policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+	user = each.key
 }
 
 resource "github_actions_secret" "aws_access_key_id" {
