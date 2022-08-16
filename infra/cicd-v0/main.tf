@@ -51,19 +51,19 @@ resource "github_actions_secret" "aws_secret_access_key" {
 	secret_name = "CICD_V0_AWS_SECRET_ACCESS_KEY"
 }
 
-resource "github_actions_secret" "aws_access_key_id" {
+resource "github_actions_secret" "temp_aws_access_key_id" {
 	plaintext_value = module.iam_user[local.active_date].iam_access_key_id
 	repository = data.github_repository.this.name
 	secret_name = "INFRA_CICD_V0_AWS_ACCESS_KEY_ID"
 }
 
-resource "github_actions_secret" "aws_region" {
+resource "github_actions_secret" "temp_aws_region" {
 	plaintext_value = "ca-central-1"
 	repository = data.github_repository.this.name
 	secret_name = "INFRA_CICD_V0_AWS_REGION"
 }
 
-resource "github_actions_secret" "aws_secret_access_key" {
+resource "github_actions_secret" "temp_aws_secret_access_key" {
 	plaintext_value = module.iam_user[local.active_date].iam_access_key_secret
 	repository = data.github_repository.this.name
 	secret_name = "INFRA_CICD_V0_AWS_SECRET_ACCESS_KEY"
