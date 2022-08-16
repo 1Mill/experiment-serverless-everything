@@ -34,6 +34,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.CICD_V0_AWS_ACCESS_KEY_ID }}
           AWS_REGION: ${{ secrets.CICD_V0_AWS_REGION }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.CICD_V0_AWS_SECRET_ACCESS_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MANUAL_GITHUB_TOKEN }}
         run: ./scripts/terragrunt/cli run-all apply
