@@ -23,6 +23,8 @@
 
 1. If you are not using `AWS_REGION=ca-central-1`, change the value of `AWS_REGION` in `./infra/cicd-v0/main.tf` as well
 
+1. On the GitHub repository website, go "Settings > Secrets > Actions" and add a new "Repository secret" `MANUAL_GITHUB_TOKEN` with your `GITHUB_TOKEN` used in  your `.env` file
+
 1. Run `./scripts/terragrunt/cli run-all apply` to deploy the application and generate your personal AWS KMS key
 
 1. Once the application is finished deploying, get your AWS KMS key from AWS and update the `.sops.yaml` file with your AWS KSM key
