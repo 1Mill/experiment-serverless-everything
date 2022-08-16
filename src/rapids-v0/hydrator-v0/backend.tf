@@ -4,7 +4,7 @@ terraform {
     bucket         = "experiment-terraform-state"
     dynamodb_table = "experiment-terraform-state-locks"
     encrypt        = true
-    key            = "src/rapids-v0/terraform.tfstate"
+    key            = "src/rapids-v0/hydrator-v0/terraform.tfstate"
     region         = "us-east-1"
   }
 }
