@@ -1,5 +1,7 @@
 name: CICD V0
 
+concurrency: cicd-v0
+
 on:
   push:
     branches:
