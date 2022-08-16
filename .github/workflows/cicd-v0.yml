@@ -31,8 +31,8 @@ jobs:
             -exec chmod 544 {} +
       - name: Running ./scripts/terragrunt/cli ...
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.CICD_V0_AWS_ACCESS_KEY_ID }}
-          AWS_REGION: ${{ secrets.CICD_V0_AWS_REGION }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CICD_V0_AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.INFRA_CICD_V0_AWS_ACCESS_KEY_ID }}
+          AWS_REGION: ${{ secrets.INFRA_CICD_V0_AWS_REGION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.INFRA_CICD_V0_AWS_SECRET_ACCESS_KEY }}
           GITHUB_TOKEN: ${{ secrets.MANUAL_GITHUB_TOKEN }}
         run: ./scripts/terragrunt/cli run-all apply
