@@ -10,6 +10,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@1mill/sops": "0.0.8"
+    "@1mill/sops": "0.0.8",
+    "ably": "^1.2.29"
   }
 }
