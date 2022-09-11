@@ -38,10 +38,16 @@ describe('MockSops', () => {
 })
 
 describe('handler', () => {
-	// * Mock imports
+	let cloudevent
 	let mockSopsImport
 
 	beforeEach(() => {
+		cloudevent = {
+			id: 'some-id-value',
+			source: 'some-source-value',
+			type: 'some-type-value',
+		}
+
 		mockSopsImport = sinon.stub(sopsImport, 'Sops').returns(new MockSops)
 	})
 
@@ -56,16 +62,6 @@ describe('handler', () => {
 	const handler = (...args) => require('.').handler(...args)
 
 	describe('when the input cloudevent is not valid', () => {
-		let cloudevent = {}
-
-		beforeEach(() => {
-			cloudevent = {
-				id: 'some-id-value',
-				source: 'some-source-value',
-				type: 'some-type-value',
-			}
-		})
-
 		describe('when the input cloudevent is missing an #id', () => {
 			it('returns the proper error message', async () => {
 				cloudevent.id = null
@@ -92,6 +88,9 @@ describe('handler', () => {
 	})
 
 	describe('when the input cloudevent is valid', () => {
-		// TODO
+		it('returns true', async () => {
+			const result = await handler(cloudevent)
+			expect(result).to.be.true
+		})
 	})
 })
