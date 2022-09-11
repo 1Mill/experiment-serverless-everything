@@ -26,6 +26,7 @@ describe('MockSops', () => {
 				expect(() => mockSops.decrypt(value)).to.throw(expected)
 			})
 		})
+
 		describe('when the input value does match a mocked response', () => {
 			it('returns the proper payload', () => {
 				Object.entries(MOCK_SOPS_DECRYPT_RESPONSES).forEach(([key, value]) => {
@@ -39,24 +40,58 @@ describe('MockSops', () => {
 describe('handler', () => {
 	// * Mock imports
 	let mockSopsImport
+
 	beforeEach(() => {
 		mockSopsImport = sinon.stub(sopsImport, 'Sops').returns(new MockSops)
 	})
+
 	afterEach(() => {
-		mockSopsImport.reset()
+		mockSopsImport.restore()
 	})
 
 	// * The handler function must be imported
 	// * and called inside a wrapper function
 	// * so that it runs only after all necessary
 	// * imports have been mocked.
-	const handler = () => require('.').handler()
+	const handler = (...args) => require('.').handler(...args)
 
-	describe('when the input cloudevent does not have an #id', () => {
-		it ('throws the proper error', async () => {
-			const cloudevent = { id: null }
-			const expected = 'Cloudevent "id" is required'
-			await expect(handler(cloudevent)).to.eventually.rejectedWith(expected)
+	describe('when the input cloudevent is not valid', () => {
+		let cloudevent = {}
+
+		beforeEach(() => {
+			cloudevent = {
+				id: 'some-id-value',
+				source: 'some-source-value',
+				type: 'some-type-value',
+			}
 		})
+
+		describe('when the input cloudevent is missing an #id', () => {
+			it('returns the proper error message', async () => {
+				cloudevent.id = null
+				const expected = 'Cloudevent "id" is required'
+				await expect(handler(cloudevent)).to.eventually.rejectedWith(expected)
+			})
+		})
+
+		describe('when the input cloudevent is missing an #source', () => {
+			it('returns the proper error message', async () => {
+				cloudevent.source = null
+				const expected = 'Cloudevent "source" is required'
+				await expect(handler(cloudevent)).to.eventually.rejectedWith(expected)
+			})
+		})
+
+		describe('when the input cloudevent is missing an #type', () => {
+			it('returns the proper error message', async () => {
+				cloudevent.type = null
+				const expected = 'Cloudevent "type" is required'
+				await expect(handler(cloudevent)).to.eventually.rejectedWith(expected)
+			})
+		})
+	})
+
+	describe('when the input cloudevent is valid', () => {
+		// TODO
 	})
 })
