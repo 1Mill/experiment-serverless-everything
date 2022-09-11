@@ -74,7 +74,7 @@ describe('handler', () => {
 			})
 		})
 
-		describe('when the input cloudevent is missing an #source', () => {
+		describe('when the input cloudevent is missing a #source', () => {
 			it('returns the proper error message', async () => {
 				cloudevent.source = null
 				const expected = 'Cloudevent "source" is required'
@@ -82,7 +82,7 @@ describe('handler', () => {
 			})
 		})
 
-		describe('when the input cloudevent is missing an #type', () => {
+		describe('when the input cloudevent is missing a #type', () => {
 			it('returns the proper error message', async () => {
 				cloudevent.type = null
 				const expected = 'Cloudevent "type" is required'
