@@ -6,7 +6,7 @@ const { expect } = require('chai')
 
 chai.use(chaiAsPromised)
 
-const MOCK_SOPS_DECRYPT_RESPONSES = Object.freeze({ ABLY_API_KEY: 'someAblyApikey' })
+const MOCK_SOPS_DECRYPT_RESPONSES = Object.freeze({ ABLY_API_KEY: 'some-ably-api-key' })
 
 class MockSops {
 	decrypt(name) {
