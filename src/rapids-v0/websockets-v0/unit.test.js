@@ -63,7 +63,7 @@ describe('handler', () => {
 
 	describe('when the input cloudevent is not valid', () => {
 		describe('when the input cloudevent is missing an #id', () => {
-			it('returns the proper error message', async () => {
+			it('throws the proper error message', async () => {
 				cloudevent.id = null
 				const expected = 'Cloudevent "id" is required'
 				await expect(handler(cloudevent)).to.eventually.rejectedWith(expected)
@@ -71,7 +71,7 @@ describe('handler', () => {
 		})
 
 		describe('when the input cloudevent is missing a #source', () => {
-			it('returns the proper error message', async () => {
+			it('throws the proper error message', async () => {
 				cloudevent.source = null
 				const expected = 'Cloudevent "source" is required'
 				await expect(handler(cloudevent)).to.eventually.rejectedWith(expected)
@@ -79,7 +79,7 @@ describe('handler', () => {
 		})
 
 		describe('when the input cloudevent is missing a #type', () => {
-			it('returns the proper error message', async () => {
+			it('throws the proper error message', async () => {
 				cloudevent.type = null
 				const expected = 'Cloudevent "type" is required'
 				await expect(handler(cloudevent)).to.eventually.rejectedWith(expected)
