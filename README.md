@@ -45,6 +45,7 @@
 1. Once the `localstack` service is running, publish, build, and invoke the `hello-world-v0` lambda locally with `./scripts/localstack/cli ./src/hello-world-v0 publish,build,invoke`
 
 1. If you make a change to the `hello-world-v0` lambda, run `./scripts/localstack/cli ./src/hello-world-v0 build,version,invoke '{ "my": "payload" }'` to re-build the image
+    * Build and paste cloudevents from <https://build.cloudevents.gdn/>
 
 ## Notes
 
