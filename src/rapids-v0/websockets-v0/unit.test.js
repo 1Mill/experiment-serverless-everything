@@ -2,9 +2,9 @@ const chai = require('chai')
 const chaiAsPromised = require('chai-as-promised')
 const sinon = require('sinon')
 const sopsImport = require('@1mill/sops')
+const { expect } = require('chai')
 
 chai.use(chaiAsPromised)
-const { expect } = chai
 
 const MOCK_SOPS_DECRYPT_RESPONSES = Object.freeze({ ABLY_API_KEY: 'someAblyApikey' })
 
