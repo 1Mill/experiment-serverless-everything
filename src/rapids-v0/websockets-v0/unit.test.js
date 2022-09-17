@@ -46,6 +46,7 @@ describe('handler', () => {
 			id: 'some-id-value',
 			source: 'some-source-value',
 			type: 'some-type-value',
+			wschannelid: 'some-wschannelid-value',
 		}
 
 		mockSopsImport = sinon.stub(sopsImport, 'Sops').returns(new MockSops)
@@ -82,6 +83,14 @@ describe('handler', () => {
 			it('throws the proper error message', async () => {
 				cloudevent.type = null
 				const expected = 'Cloudevent "type" is required'
+				await expect(handler(cloudevent)).to.eventually.rejectedWith(expected)
+			})
+		})
+
+		describe('when the input cloudevent is missing a #wschannelid', () => {
+			it('throws the proper error message', async () => {
+				cloudevent.wschannelid = null
+				const expected = 'Cloudevent "wschannelid" is required'
 				await expect(handler(cloudevent)).to.eventually.rejectedWith(expected)
 			})
 		})
