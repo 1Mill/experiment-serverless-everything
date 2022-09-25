@@ -37,7 +37,7 @@ describe('MockSops', () => {
 	})
 })
 
-describe('handler', () => {
+describe('.handler', () => {
 	let cloudevent
 	let mockSopsImport
 
@@ -96,10 +96,16 @@ describe('handler', () => {
 		})
 	})
 
-	describe('when the input cloudevent is valid', () => {
+	xdescribe('when the input cloudevent is valid', () => {
+		beforeEach(() => {
+			// TODO: Discover how to mock Ably
+		})
+
 		it('returns true', async () => {
 			const result = await handler(cloudevent)
 			expect(result).to.be.true
 		})
+
+		it('publishes the cloudevent to the proper Ably channel', () => {})
 	})
 })
