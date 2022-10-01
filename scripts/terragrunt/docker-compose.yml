@@ -2,8 +2,8 @@ version: '3'
 
 services:
   terragrunt:
-    image: alpine/terragrunt:1.2.6
-    command: bash -c "terragrunt $COMMAND --terragrunt-exclude-dir ./"
+    image: $DOCKER_IMAGE
+    command: bash -c "$COMMAND"
     environment:
       AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
       AWS_REGION: $AWS_REGION

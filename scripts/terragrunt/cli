@@ -3,14 +3,15 @@ set -e
 
 function cli() {
 	# * Props
-	local command=${@:1}
+	local terraform_version=$1
+	local command=${@:2}
 
-	# * Computed values
-	local cli_root=$(dirname $BASH_SOURCE)
-	local project_root=$PWD/$cli_root/../../ # * Must be absolute path for Docker Volume
+	# * Computed helpers
+	local script_root=$(dirname $BASH_SOURCE)
+	local project_root=$PWD/$script_root/../../ # * Must be absolute path for Docker Volume
 
 	# * Load CLI environmental variables
-	source $cli_root/config
+	source $script_root/config
 
 	# * Load .env from project root into the environment if it exists
 	local env_file=$project_root/$ENV_FILENAME
@@ -18,14 +19,19 @@ function cli() {
 		source $env_file
 	fi
 
+	# * Computed props
+	local docker_image=alpine/terragrunt:$terraform_version
+	local docker_command="terragrunt $command --terragrunt-exclude-dir ./"
+
 	AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
 	AWS_REGION=$AWS_REGION \
 	AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
 	GITHUB_TOKEN=$GITHUB_TOKEN \
-	COMMAND=$command \
+	COMMAND=$docker_command \
 	DIR=$project_root \
+	DOCKER_IMAGE=$docker_image \
 	docker compose \
-		--file $(dirname $BASH_SOURCE)/docker-compose.yml \
+		--file $script_root/docker-compose.yml \
 		up \
 			--exit-code-from terragrunt \
 			terragrunt
