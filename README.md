@@ -25,7 +25,7 @@
 
 1. On the GitHub repository website, go "Settings > Secrets > Actions" and add a new "Repository secret" `MANUAL_GITHUB_TOKEN` with your `GITHUB_TOKEN` used in  your `.env` file
 
-1. Run `./scripts/terragrunt/cli run-all apply` to deploy the application and generate your personal AWS KMS key
+1. Run `./scripts/run-all/cli apply` to deploy the application and generate your personal AWS KSM key
 
 1. Once the application is finished deploying, get your AWS KMS key from AWS and update the `.sops.yaml` file with your AWS KSM key
 
@@ -36,7 +36,7 @@
 
 1. Run `./scripts/localstack/cli ./src/hello-world-v0/ version` to update the `hello-world-v0` version
 
-1. Run `./scripts/terragrunt/cli run-all apply` to update the `hello-world-v0` lambda with your new version which contains your new `secrets.sops.json` file
+1. Run `./scripts/run-all/cli apply` to update the `hello-world-v0` lambda with your new version which contains your new `secrets.sops.json` file
 
 1. Once the application is finished deploying, in the AWS Lambda console for `hello-world-v0`, you should be able to "Test" your lambda successfully
 
@@ -46,6 +46,8 @@
 
 1. If you make a change to the `hello-world-v0` lambda, run `./scripts/localstack/cli ./src/hello-world-v0 build,version,invoke '{ "my": "payload" }'` to re-build the image
     * Build and paste cloudevents from <https://build.cloudevents.gdn/>
+
+1. Destroy everything by running `./scripts/run-all/cli destroy`
 
 ## Notes
 

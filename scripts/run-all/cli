@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -e
+
+function cli() {
+	# * Props
+	local command=${@:1}
+
+	# * Computed helpers
+	local script_root=$(dirname $BASH_SOURCE)
+	local project_root=$script_root/../..
+
+	local files=$(find $project_root/terraform-versions/ -type f)
+
+	for file in $files
+	do
+		local terragrunt_module=terraform-versions/$(basename $file)
+		local version=$(sed "s/[^0-9.]*//g" $file)
+
+		echo "Running run-all $command for $version"
+
+		source $project_root/scripts/terragrunt/cli \
+			$version \
+			run-all $command --terragrunt-modules-that-include $terragrunt_module
+	done
+}
+
+cli ${@:1} # Pass through all arguments to function
