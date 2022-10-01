@@ -8,7 +8,7 @@ module "config" {
 }
 module "serverless_docker_function" {
 	source  = "1Mill/serverless-docker-function/aws"
-	version = "0.0.8"
+	version = "~> 1.0"
 
 	docker = { build = abspath(path.module) }
 	environment = {
