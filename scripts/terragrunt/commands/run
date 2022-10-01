@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -e
+
+function run() {
+	# * Props
+	local image=${1}
+	local command=${@:2}
+
+	# * Computed values
+	local cmd_root=$(dirname $BASH_SOURCE)
+	local project_root=$PWD/$cmd_root/../../../ # * Must be absolute path for Docker Volume
+
+	# * Load CLI environmental variables
+	source $cmd_root/../config
+
+	# * Load .env from project root into the environment if it exists
+	local env_file=$project_root/$ENV_FILENAME
+	if [[ -f "$env_file" ]]; then
+		source $env_file
+	fi
+
+	AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+	AWS_REGION=$AWS_REGION \
+	AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+	GITHUB_TOKEN=$GITHUB_TOKEN \
+	COMMAND=$command \
+	DIR=$project_root \
+	IMAGE=$image \
+	docker compose \
+		--file $(dirname $BASH_SOURCE)/run.docker-compose.yml \
+		up \
+			--exit-code-from terragrunt \
+			terragrunt
+}
+
+run ${@:1} # * Pass through all arguments to function

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   terragrunt:
-    image: alpine/terragrunt:1.2.6
+    image: $IMAGE
     command: bash -c "terragrunt $COMMAND --terragrunt-exclude-dir ./"
     environment:
       AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
