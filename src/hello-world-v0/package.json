@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "@1mill/cloudevents": "^4.6.1",
+    "@1mill/lambda": "^0.4.2",
     "@1mill/sops": "0.0.8"
   }
 }
